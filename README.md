@@ -1,7 +1,5 @@
 # WazuhAI - ML-Powered SIEM Solution
 
-![Wazuh Logo](https://wazuh.com/uploads/2021/03/Wazuh_logo_light@2x.png)
-
 ## Overview
 
 WazuhAI is an enhanced Security Information and Event Management (SIEM) solution built on top of Wazuh that integrates advanced machine learning capabilities for improved threat detection and incident response. This project provides a complete, containerized setup for deploying a production-ready Wazuh environment with customized ML modules for anomaly detection, behavioral analysis, and predictive threat intelligence.
