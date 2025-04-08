@@ -1,0 +1,53 @@
+# Cluster settings
+cluster.name: es-wazuh
+node.name: elasticsearch
+network.host: 0.0.0.0
+http.port: 9200
+transport.port: 9300
+
+# Path settings
+path.data: /usr/share/elasticsearch/data
+path.logs: /usr/share/elasticsearch/logs
+
+# Memory settings
+bootstrap.memory_lock: true
+ES_JAVA_OPTS: -Xms2g -Xmx2g
+
+# Security settings
+xpack.security.enabled: true
+xpack.security.transport.ssl.enabled: true
+xpack.security.transport.ssl.key: /usr/share/elasticsearch/config/ssl/elasticsearch.key
+xpack.security.transport.ssl.certificate: /usr/share/elasticsearch/config/ssl/elasticsearch.crt
+xpack.security.transport.ssl.certificate_authorities: /usr/share/elasticsearch/config/ssl/ca.crt
+xpack.security.http.ssl.enabled: true
+xpack.security.http.ssl.key: /usr/share/elasticsearch/config/ssl/elasticsearch.key
+xpack.security.http.ssl.certificate: /usr/share/elasticsearch/config/ssl/elasticsearch.crt
+xpack.security.http.ssl.certificate_authorities: /usr/share/elasticsearch/config/ssl/ca.crt
+
+# Discovery settings
+discovery.type: single-node
+cluster.initial_master_nodes: elasticsearch
+
+# Index settings
+action.auto_create_index: .wazuh,.wazuh-*
+
+# Performance settings
+thread_pool.write.queue_size: 1000
+thread_pool.search.queue_size: 1000
+indices.memory.index_buffer_size: 30%
+indices.queries.cache.size: 20%
+
+# Monitoring settings
+xpack.monitoring.enabled: true
+xpack.monitoring.collection.enabled: true
+
+# Audit logging
+xpack.security.audit.enabled: true
+xpack.security.audit.logfile.events.include: access_granted,access_denied,authentication_failed,connection_denied,tampered_request,run_as_granted,run_as_denied,tampered_with_authentication
+
+# Snapshot settings
+path.repo: ["/usr/share/elasticsearch/data/backups"]
+
+# Cross-cluster settings
+cluster.remote.wazuh-cluster.seeds: elasticsearch:9300
+cluster.remote.wazuh-cluster.skip_unavailable: true 

@@ -1,0 +1,69 @@
+# Server settings
+server.port: 5601
+server.host: "0.0.0.0"
+server.name: "wazuh-kibana"
+
+# Elasticsearch settings
+elasticsearch.hosts: ["http://elasticsearch:9200"]
+elasticsearch.username: "kibana_system"
+elasticsearch.password: "${ELASTIC_PASSWORD}"
+
+# Security settings
+xpack.security.enabled: true
+xpack.security.encryptionKey: "${ENCRYPTION_KEY}"
+xpack.security.audit.enabled: true
+xpack.security.audit.appender.type: file
+xpack.security.audit.appender.fileName: /var/log/kibana/audit.log
+xpack.security.audit.appender.policy.type: time-interval
+xpack.security.audit.appender.policy.interval: 1d
+xpack.security.audit.appender.policy.keep: 7
+
+# SSL/TLS settings
+elasticsearch.ssl.enabled: true
+elasticsearch.ssl.certificateAuthorities: ["/usr/share/kibana/config/ssl/ca.crt"]
+elasticsearch.ssl.verificationMode: full
+server.ssl.enabled: true
+server.ssl.certificate: /usr/share/kibana/config/ssl/kibana.crt
+server.ssl.key: /usr/share/kibana/config/ssl/kibana.key
+
+# Wazuh settings
+wazuh.api.url: https://wazuh-manager:55000
+wazuh.api.port: 55000
+wazuh.api.username: wazuh-wui
+wazuh.api.password: ${WAZUH_API_PASSWORD}
+wazuh.api.ssl.verify: true
+wazuh.api.ssl.cert: /usr/share/kibana/config/ssl/kibana.crt
+wazuh.api.ssl.key: /usr/share/kibana/config/ssl/kibana.key
+wazuh.api.ssl.ca: /usr/share/kibana/config/ssl/ca.crt
+
+# Logging settings
+logging.verbose: true
+logging.dest: /var/log/kibana/kibana.log
+logging.rotate.enabled: true
+logging.rotate.maxSize: 100MB
+logging.rotate.maxFiles: 10
+
+# Performance settings
+ops.interval: 5000
+monitoring.ui.container.elasticsearch.enabled: true
+monitoring.ui.container.logstash.enabled: true
+monitoring.ui.container.kibana.enabled: true
+
+# UI settings
+xpack.reporting.enabled: true
+xpack.reporting.encryptionKey: "${ENCRYPTION_KEY}"
+xpack.reporting.capture.browser.chromium.disableSandbox: true
+xpack.reporting.capture.browser.chromium.proxy.enabled: false
+
+# ML settings
+xpack.ml.enabled: true
+xpack.ml.max_model_memory_limit: 1gb
+xpack.ml.max_lazy_ml_nodes: 0
+
+# Monitoring settings
+xpack.monitoring.enabled: true
+xpack.monitoring.elasticsearch.hosts: ["http://elasticsearch:9200"]
+xpack.monitoring.elasticsearch.username: "kibana_system"
+xpack.monitoring.elasticsearch.password: "${ELASTIC_PASSWORD}"
+xpack.monitoring.elasticsearch.ssl.enabled: true
+xpack.monitoring.elasticsearch.ssl.certificateAuthorities: ["/usr/share/kibana/config/ssl/ca.crt"] 
